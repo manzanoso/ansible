@@ -3,14 +3,27 @@
   hosts: win
   gather_facts: true
   tasks:
-  - name: Install IIS Web-Server with sub features and management tools
-    ansible.windows.win_feature:
-      name: Web-Server
-      state: present
-      include_sub_features: true
-      include_management_tools: true
-    register: win_feature
-
-  - name: Reboot if installing Web-Server feature requires it
-    ansible.windows.win_reboot:
-    when: win_feature.reboot_required     
+    - name: Install IIS Web-Server with sub features and management tools
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+        include_sub_features: true
+        include_management_tools: true
+      register: win_feature
+  
+    - name: Reboot if installing Web-Server feature requires it
+      ansible.windows.win_reboot:
+      when: win_feature.reboot_required     
+  
+    - name: Create directory structure
+      ansible.windows.win_file:
+        path: C:\virtualdirectory\some
+        state: directory
+    
+    - name: Creates an application pool, sets attributes and starts it
+       community.windows.win_iis_webapppool:
+         name: Teste
+         state: started
+         attributes:
+           managedRuntimeVersion: v4.0
+           autoStart: yes    
