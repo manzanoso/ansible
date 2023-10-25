@@ -21,9 +21,9 @@
         state: directory
     
     - name: Creates an application pool, sets attributes and starts it
-       community.windows.win_iis_webapppool:
-         name: Teste
-         state: started
-         attributes:
-           managedRuntimeVersion: v4.0
-           autoStart: yes    
+      community.windows.win_iis_webapppool:
+        name: Teste
+        state: started
+        attributes:
+          managedRuntimeVersion: v4.0
+          autoStart: yes    
