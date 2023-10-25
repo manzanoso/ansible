@@ -1,7 +1,6 @@
 - name: Windows Feature
   hosts: win
   gather_facts: true
-  become: true
   tasks:
     - name: Run ipconfig and return IP address information.
       raw: ipconfig
