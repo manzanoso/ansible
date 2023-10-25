@@ -1,11 +1,8 @@
-- hosts: win
+---
+- name: Windows Feature
+  hosts: win
   gather_facts: true
   tasks:
-    - name: Run ipconfig and return IP address information.
-      raw: ipconfig
-      register: ipconfig
-    #- debug: var=ipconfig
-
     - name: Install IIS Web-Server with sub features and management tools
       ansible.windows.win_feature:
         name: Web-Server
