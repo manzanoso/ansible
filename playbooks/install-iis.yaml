@@ -26,7 +26,7 @@
         dest: C:\virtualdirectory\some\T258806_4.zip
 
     - name: Unzip zip file
-      when: 1 == 2
+      when: 2 == 2
       community.windows.win_unzip:
         src: C:\virtualdirectory\some\T258806_4.zip
         dest: C:\virtualdirectory\some\        
