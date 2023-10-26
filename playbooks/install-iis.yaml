@@ -21,7 +21,7 @@
         state: directory
     
     - name: Download File
-      ansible.builtin.get_url:
+      ansible.windows.win_get_url:
         url: https://www4.newconsoftware.com.br/teste/T258806_4.zip
         dest: C:\virtualdirectory\some\T258806_4.zip
 
