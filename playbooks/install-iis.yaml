@@ -25,6 +25,11 @@
         url: https://www4.newconsoftware.com.br/teste/T258806_4.zip
         dest: C:\virtualdirectory\some\T258806_4.zip
 
+    - name: Unzip zip file
+      community.windows.win_unzip:
+        src: C:\virtualdirectory\some\T258806_4.zip
+        dest: C:\virtualdirectory\some\        
+
     - name: Creates an application pool, sets attributes and starts it
       community.windows.win_iis_webapppool:
         name: Teste
