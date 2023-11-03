@@ -4,9 +4,7 @@
   gather_facts: true
   tasks:
      - name: Executar script PowerShell
-       win_shell: |
-         $resultado = c:\\Newcon_Versao\\atualiza_script.ps1
-         Write-Output $resultado
+       win_shell: C:\\Newcon_Versao\\atualiza_script.ps1
        args:
          executable: powershell.exe         
        register: script_output      
