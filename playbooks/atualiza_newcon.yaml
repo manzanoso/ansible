@@ -4,4 +4,4 @@
   gather_facts: true
   tasks:
      - name: Executar script PowerShell
-       win_shell: C:\Newcon_Versao\atualiza_script.ps1                1
+       win_command: powershell.exe -ExecutionPolicy ByPass -File C:\Newcon_Versao\atualiza_script.ps1
