@@ -4,9 +4,9 @@
   gather_facts: true
   tasks:
      - name: Executar script PowerShell
-        ansible.windows.win_shell: |
-          $resultado = C:\Newcon_Versao\atualiza_script.ps1
-          Write-Output $resultado
-        args:
-          executable: powershell.exe
-        register: script_output      
+       ansible.windows.win_shell: |
+         $resultado = C:\Newcon_Versao\atualiza_script.ps1
+         Write-Output $resultado
+       args:
+         executable: powershell.exe
+       register: script_output      
