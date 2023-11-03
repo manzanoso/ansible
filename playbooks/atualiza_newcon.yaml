@@ -7,6 +7,4 @@
        ansible.windows.win_shell: |
          $resultado = C:\Newcon_Versao\atualiza_script.ps1
          Write-Output $resultado
-       args:
-         executable: powershell.exe
        register: script_output      
