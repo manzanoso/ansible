@@ -25,11 +25,12 @@
       win_find:
         paths: C:\Newcon_Versao\Releases\
         patterns: "*.ver"
-      register: exist_script_db
+      register: saida
 
     - name: Exibir a saída capturada
       debug:
-        var: exist_script_db.stdout
+      msg: "A saída capturada é: {{ saida.stdout }}"
+
 
     - name: 5 Atualizar Script de BD
       win_shell: |
