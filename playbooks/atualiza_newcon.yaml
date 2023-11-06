@@ -10,4 +10,4 @@
 
      - name: Valida a saida da task anterior
        fail:
-       when: script_output.stdout == 'Processo finalizado sem sucesso'    
+       when: script_output.stdout == 'Processo finalizado sem sucesso.\n'    
