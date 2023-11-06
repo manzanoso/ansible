@@ -25,7 +25,7 @@
       win_find:
         paths: C:\Newcon_Versao\Releases\
         patterns: "*.ver"
-      register: exist_script_db    
+      register: exist_script_db
 
     - name: Exibir a saída capturada
       debug:
