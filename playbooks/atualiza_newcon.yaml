@@ -49,14 +49,14 @@
         dest: C:\Newcon\Bin_Newcon_Core
       when: exists_bin_core.matched > 0        
 
-    - name: Tem binarios do Newcon Core
-      win_find:
-        paths: C:\Newcon_Versao\Releases\Bin_Sch_Conins\
-        patterns: "*.*"
-      register: exists_bin_conins
-
-    - name: Copiar binarios para diretorio Sch_Conins
-      ansible.windows.win_copy:
-        src: C:\Newcon_Versao\Releases\Bin_Sch_Conins\
-        dest: C:\Newcon\Bin_Sch_Conins
-      when: exists_bin_conins
+#    - name: Tem binarios do Newcon Core
+#      win_find:
+#        paths: C:\Newcon_Versao\Releases\Bin_Sch_Conins\
+#        patterns: "*.*"
+#      register: exists_bin_conins
+#
+#    - name: Copiar binarios para diretorio Sch_Conins
+#      ansible.windows.win_copy:
+#        src: C:\Newcon_Versao\Releases\Bin_Sch_Conins\
+#        dest: C:\Newcon\Bin_Sch_Conins
+#      when: exists_bin_conins
