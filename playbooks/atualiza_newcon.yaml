@@ -47,7 +47,6 @@
       ansible.windows.win_copy:
         src: C:\Newcon_Versao\Releases\Bin_Newcon_Core\*.*
         dest: C:\Newcon\Bin_Newcon_Core\
-      delegate_to: localhost
       when: exists_bin_core.matched > 0        
 
 #    - name: Tem binarios do Newcon Core
