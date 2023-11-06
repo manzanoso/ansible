@@ -35,9 +35,9 @@
 
     - name: Valida se o script de BD foi atualizado com sucesso
       fail:
-      when: 1 > 2 #script_process.stdout == 'Processo finalizado sem sucesso.\n'      
+      when: 0 > 1 #script_process.stdout == 'Processo finalizado sem sucesso.\n'      
 
     - name: Tem binarios do Newcon Core
       debug:
         msg: "Ansible Version"
-      when: 1 > 2  
+      when: 0 > 1  
