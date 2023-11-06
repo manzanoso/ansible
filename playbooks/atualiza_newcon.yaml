@@ -9,4 +9,3 @@
        register: script_output    
      - meta: 
          end_play  
-       when: true
