@@ -18,16 +18,22 @@
         src: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000003.zip
         dest: C:\Newcon_Versao\Releases\
 
-    - name: 4 Atualizar Script de BD
+    - name: 4 Valida se tem Script de BD
+      win_find:
+        paths: C:\Newcon_Versao\Releases\
+        patterns: "*.ver"
+      register: resultado_arquivos      
+
+    - name: 5 Atualizar Script de BD
       win_shell: |
         $resultado = c:\Newcon_Versao\atualiza_script.ps1
       register: script_output    
 
-    - name: 5 Valida se o script de BD foi atualizado com sucesso
+    - name: 6 Valida se o script de BD foi atualizado com sucesso
       fail:
       when: script_output.stdout == 'Processo finalizado sem sucesso.\n'
 
-    - name: 6 Tem binarios do Newcon Core
+    - name: 7 Tem binarios do Newcon Core
       debug:
         msg: "Ansible Version"
       when: 1 == 1  
