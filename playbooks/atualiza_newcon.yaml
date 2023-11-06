@@ -7,7 +7,8 @@
        win_shell: |
          $resultado = c:\Newcon_Versao\atualiza_script.ps1
        register: script_output    
-     -name: Sair do playbook
+
+     - name: Sair do playbook
        debug: msg="one"
        meta: end_playbook
        when: true
