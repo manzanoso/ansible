@@ -3,47 +3,41 @@
   hosts: win
   gather_facts: true
   tasks:
-    - name: 1 Criar estrutura de diretorios
+    - name: Criar estrutura de diretorios
       ansible.windows.win_file:
         path: C:\NewDeploy\Pacotes
         state: directory      
       when: 0 > 1
 
-    - name: 2 Download do pacote da versao
+    - name: Download do pacote da versao
       ansible.windows.win_get_url:
         url: https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000003.zip
         dest: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000003.zip
       when: 0 > 1
 
-    - name: 3 Descompactar pacote
+    - name: Descompactar pacote
       community.windows.win_unzip:
         src: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000003.zip
         dest: C:\Newcon_Versao\Releases\
       when: 0 > 1
 
-    - name: 4 Valida se tem Script de BD
+    - name: Valida se tem Script de BD
       win_find:
         paths: C:\Newcon_Versao\Releases\
         patterns: "*.ver"
-      register: saida
+      register: exist_script_db
 
-    - name: Exibir a saida capturada
-      debug:
-        msg: "Existe o arquivo"
-      when: saida.matched > 0
-
-    - name: 5 Atualizar Script de BD
+    - name: Atualizar Script de BD
       win_shell: |
         $resultado = c:\Newcon_Versao\atualiza_script.ps1
-      register: script_output    
-      # when: exist_script_db is succeeded
-      when: 0 > 1
+      register: script_process    
+      when: exist_script_db.matched > 0
 
-    - name: 6 Valida se o script de BD foi atualizado com sucesso
+    - name: Valida se o script de BD foi atualizado com sucesso
       fail:
-      when: script_output.stdout == 'Processo finalizado sem sucesso.\n'      
+      when: 1 > 2 #script_process.stdout == 'Processo finalizado sem sucesso.\n'      
 
-    - name: 7 Tem binarios do Newcon Core
+    - name: Tem binarios do Newcon Core
       debug:
         msg: "Ansible Version"
-      when: 1 == 2  
+      when: 1 > 2  
