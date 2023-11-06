@@ -8,6 +8,7 @@
          $resultado = c:\Newcon_Versao\atualiza_script.ps1
        register: script_output    
 
-     - meta: end_playbook
+     - name: Sair do fluxo
+       ansible.builtin.meta: end_playbook
        when: true
        
