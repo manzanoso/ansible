@@ -45,9 +45,10 @@
 
     - name: Copiar binarios para diretorio Core
       ansible.windows.win_copy:
-        remote_src: C:\Newcon_Versao\Releases\Bin_Newcon_Core\*.*
+        src: C:\Newcon_Versao\Releases\Bin_Newcon_Core\*.*
         dest: C:\Newcon\Bin_Newcon_Core\
-      when: exists_bin_core.matched > 0        
+      when: exists_bin_core.matched > 0   
+      remote_src: true           
 
 #    - name: Tem binarios do Newcon Core
 #      win_find:
