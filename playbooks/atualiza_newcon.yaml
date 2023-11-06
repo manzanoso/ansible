@@ -16,7 +16,7 @@
     - name: 3 Descompactar pacote
       community.windows.win_unzip:
         src: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000003.zip
-        dest: C:\NewDeploy\Pacotes\  
+        dest: C:\Newcon_Versao\Releases\
 
     - name: 4 Atualizar Script de BD
       win_shell: |
