@@ -3,7 +3,7 @@
   hosts: win
   gather_facts: true
   tasks:
-    - name: 1 Criar estrutura de diretórios
+    - name: 1 Criar estrutura de diretorios
       ansible.windows.win_file:
         path: C:\NewDeploy\Pacotes
         state: directory      
