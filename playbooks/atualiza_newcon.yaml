@@ -10,6 +10,6 @@
 
      - name: Sair do playbook
        - debug: msg="one"
-          meta: end_playbook
-          when: true
+           meta: end_playbook
+           when: true
        - debug: msg="two"
