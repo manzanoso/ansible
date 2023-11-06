@@ -29,7 +29,8 @@
 
     - name: Exibir a saida capturada
       debug:
-        msg: "A saida capturada eh: {{ saida.files }}"
+        msg: "Existe o arquivo"
+      when: saida.matched > 0
 
     - name: 5 Atualizar Script de BD
       win_shell: |
