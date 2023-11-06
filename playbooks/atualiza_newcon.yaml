@@ -6,5 +6,4 @@
      - name: Executar script PowerShell
        win_shell: |
          $resultado = c:\Newcon_Versao\atualiza_script.ps1
-         Write-Output $resultado 
        register: script_output      
