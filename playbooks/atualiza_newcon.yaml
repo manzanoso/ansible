@@ -7,6 +7,7 @@
       ansible.windows.win_file:
         path: C:\NewDeploy\Pacotes
         state: directory      
+      when: 0 > 1
 
     - name: 2 Download do pacote da versao
       ansible.windows.win_get_url:
@@ -24,19 +25,20 @@
       win_find:
         paths: C:\Newcon_Versao\Releases\
         patterns: "*.ver"
-      register: resultado_arquivos      
+      register: exist_script_db   
+      ignore_errors: true   
 
     - name: 5 Atualizar Script de BD
       win_shell: |
         $resultado = c:\Newcon_Versao\atualiza_script.ps1
       register: script_output    
-      when: 0 > 1
-      
+      when: exist_script_db is succeeded
+
     - name: 6 Valida se o script de BD foi atualizado com sucesso
       fail:
-      when: script_output.stdout == 'Processo finalizado sem sucesso.\n'
+      when: script_output.stdout == 'Processo finalizado sem sucesso.\n'      
 
     - name: 7 Tem binarios do Newcon Core
       debug:
         msg: "Ansible Version"
-      when: 1 == 1  
+      when: 1 == 2  
