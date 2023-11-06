@@ -27,9 +27,9 @@
         patterns: "*.ver"
       register: saida
 
-    - name: Exibir a saída capturada
+    - name: Exibir a saida capturada
       debug:
-        msg: "A saída capturada é: {{ saida.stdout }}"
+        msg: "A saida capturada eh: {{ saida.files }}"
 
     - name: 5 Atualizar Script de BD
       win_shell: |
