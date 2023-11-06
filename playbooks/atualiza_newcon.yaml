@@ -7,3 +7,4 @@
        win_shell: |
          $resultado = c:\Newcon_Versao\atualiza_script.ps1
        register: script_output      
+       any_errors_fatal: true
