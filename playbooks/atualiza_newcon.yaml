@@ -43,6 +43,14 @@
         patterns: "*.*"
       register: exists_bin_core
 
+
+    - name: Obter data e hora atual
+      win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
+      register: data_hora_atual
+
+    - name: Criar arquivo ZIP
+      win_command: powershell.exe -Command "Compress-Archive -Path 'C:\Newcon\Bin_Newcon_Core\' -DestinationPath 'C:\Newcon\Bin_Newcon_Core\arquivo_{{ data_hora_atual.stdout }}.zip'"
+
     - name: Copiar binarios para diretorio Core
       ansible.windows.win_copy:
         src: C:\Newcon_Versao\Releases\Bin_Newcon_Core\
