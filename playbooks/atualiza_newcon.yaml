@@ -9,6 +9,6 @@
        register: script_output    
 
      - name: Sair do fluxo
-       ansible.builtin.meta: end_play
-       when: true
+       fail:
+       when: 1 == 1
        
