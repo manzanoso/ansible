@@ -8,6 +8,6 @@
          $resultado = c:\Newcon_Versao\atualiza_script.ps1
        register: script_output    
 
-     - name: Sair do playbook
-       meta: end_playbook
+     - meta: end_playbook
        when: true
+       
