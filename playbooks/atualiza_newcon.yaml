@@ -28,6 +28,6 @@
       when: script_output.stdout == 'Processo finalizado sem sucesso.\n'
 
     - name: 6 Tem binarios do Newcon Core
-        debug:
-        msg: "Ansible Version: {{ ansibleVersion.stdout }}"
+      debug:
+      msg: "Ansible Version: {{ ansibleVersion.stdout }}"
       when: 1 == 1  
