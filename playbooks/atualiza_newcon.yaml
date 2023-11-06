@@ -25,8 +25,11 @@
       win_find:
         paths: C:\Newcon_Versao\Releases\
         patterns: "*.ver"
-      register: exist_script_db   
-      ignore_errors: true   
+      register: exist_script_db    
+
+    - name: Exibir a saída capturada
+      debug:
+        var: exist_script_db.stdout
 
     - name: 5 Atualizar Script de BD
       win_shell: |
