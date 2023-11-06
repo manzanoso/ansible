@@ -29,8 +29,7 @@
 
     - name: Exibir a saída capturada
       debug:
-      msg: "A saída capturada é: {{ saida.stdout }}"
-
+        msg: "A saída capturada é: {{ saida.stdout }}"
 
     - name: 5 Atualizar Script de BD
       win_shell: |
