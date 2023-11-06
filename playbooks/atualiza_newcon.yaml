@@ -35,7 +35,8 @@
       win_shell: |
         $resultado = c:\Newcon_Versao\atualiza_script.ps1
       register: script_output    
-      when: exist_script_db is succeeded
+      # when: exist_script_db is succeeded
+      when: 0 > 1
 
     - name: 6 Valida se o script de BD foi atualizado com sucesso
       fail:
