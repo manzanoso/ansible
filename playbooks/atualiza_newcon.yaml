@@ -9,7 +9,7 @@
        register: script_output    
 
      - name: Sair do playbook
-       debug: msg="one"
-       meta: end_playbook
-       when: true
-       debug: msg="two"
+       - debug: msg="one"
+          meta: end_playbook
+          when: true
+       - debug: msg="two"
