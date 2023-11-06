@@ -23,6 +23,6 @@
         $resultado = c:\Newcon_Versao\atualiza_script.ps1
       register: script_output    
 
-    - name: Valida a saida da task anterior
+    - name: 5 Valida se o script foi atualizado com sucesso
       fail:
       when: script_output.stdout == 'Processo finalizado sem sucesso.\n'
