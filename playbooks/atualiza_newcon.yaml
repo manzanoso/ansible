@@ -3,11 +3,26 @@
   hosts: win
   gather_facts: true
   tasks:
-     - name: Executar script PowerShell
-       win_shell: |
-         $resultado = c:\Newcon_Versao\atualiza_script.ps1
-       register: script_output    
+    - name: Criar estrutura de diretórios
+      ansible.windows.win_file:
+        path: C:\NewDeploy\Pacotes
+        state: directory      
 
-     - name: Valida a saida da task anterior
-       fail:
-       when: script_output.stdout == 'Processo finalizado sem sucesso.\n'    
+    - name: 1 Download do pacote da versao
+      ansible.windows.win_get_url:
+        url: https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000002.zip
+        dest: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000002.zip
+
+    - name: Unzip zip file
+      community.windows.win_unzip:
+        src: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000002.zip
+        dest: C:\NewDeploy\Pacotes\  
+
+#    - name: Executar script PowerShell
+#      win_shell: |
+#        $resultado = c:\Newcon_Versao\atualiza_script.ps1
+#      register: script_output    
+#
+#    - name: Valida a saida da task anterior
+#      fail:
+#      when: script_output.stdout == 'Processo finalizado sem sucesso.\n'
