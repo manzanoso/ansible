@@ -8,7 +8,6 @@
          $resultado = c:\Newcon_Versao\atualiza_script.ps1
        register: script_output    
 
-     - name: Sair do fluxo
+     - name: Valida a saida da task anterior
        fail:
-       when: 1 == 2
-       
+       when: script_output.stdout == 'Processo finalizado sem sucesso'    
