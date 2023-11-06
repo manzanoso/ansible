@@ -29,5 +29,5 @@
 
     - name: 6 Tem binarios do Newcon Core
       debug:
-      msg: "Ansible Version: {{ ansibleVersion.stdout }}"
+        msg: "Ansible Version"
       when: 1 == 1  
