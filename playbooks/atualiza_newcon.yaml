@@ -47,8 +47,9 @@
       ansible.windows.win_copy:
         src: C:\Newcon_Versao\Releases\Bin_Newcon_Core\*.*
         dest: C:\Newcon\Bin_Newcon_Core\
+        remote_src: true            
       when: exists_bin_core.matched > 0   
-      remote_src: true           
+       
 
 #    - name: Tem binarios do Newcon Core
 #      win_find:
