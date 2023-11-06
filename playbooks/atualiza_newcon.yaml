@@ -7,5 +7,5 @@
        win_shell: |
          $resultado = c:\Newcon_Versao\atualiza_script.ps1
        register: script_output    
-     - meta: 
-         end_play  
+     - meta: end_playbook
+       when: true
