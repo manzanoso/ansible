@@ -7,6 +7,6 @@
        win_shell: |
          $resultado = c:\Newcon_Versao\atualiza_script.ps1
        register: script_output    
-       when: 2 == 2
+       when: 23 == 2
          meta: end_play  
        
