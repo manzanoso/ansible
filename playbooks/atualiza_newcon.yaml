@@ -49,7 +49,7 @@
 
     - name: Nome do arquivo de backup do Newcon Core
       set_fact:
-        arquivo_newcon_core: "{{ C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout }}.zip }}"
+        arquivo_newcon_core: "C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout }}.zip"
 
     - name: Criar arquivo ZIP
       community.windows.win_zip:
