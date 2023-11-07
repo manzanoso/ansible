@@ -50,7 +50,7 @@
     - name: Criar arquivo ZIP
       community.windows.win_zip:
         src: C:\Newcon\Bin_Newcon_Core\*
-        dest: C:\Newcon\Backups\arquivo_`{{ data_hora_atual.stdout }}`.zip
+        dest: C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout | regex_replace('[\\r\\n\\t]+','') }}.zip
      # community.windows.win_zip:    
      # win_command: powershell.exe -Command "Compress-Archive -Path 'C:\Newcon\Bin_Newcon_Core\' -DestinationPath 'C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout }}.zip'"
 
