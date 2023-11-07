@@ -3,6 +3,10 @@
   hosts: win
   gather_facts: true
   tasks:
+    - name: Saida Variavel
+      debug:
+        msg: '{{ diretorio_origem }}'
+
     - name: Obter data e hora atual
       win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
       register: data_hora
@@ -71,7 +75,7 @@
         patterns: "*.*"
       register: exists_bin_sch
 
-    - name: Criar arquivo ZIP
+    - name: Criar arquivo ZIP Sch Conins
       community.windows.win_zip:
         src: C:\Newcon\Bin_Sch_Conins\*
         dest: 'C:\Newcon\Backups\sch_conins_{{ data_hora_atual }}.zip'
@@ -84,4 +88,3 @@
         remote_src: true            
       when: exists_bin_sch.matched > 0         
        
-
