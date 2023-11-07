@@ -47,6 +47,10 @@
       win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
       register: data_hora_atual
 
+    - name: print UIGUID
+      debug:
+        msg: "{{ data_hora_atual.stdout | regex_replace('(\\r\\n)','') }}"
+
     - name: Criar arquivo ZIP
       community.windows.win_zip:
         src: C:\Newcon\Bin_Newcon_Core\*
