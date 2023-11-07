@@ -51,7 +51,11 @@
 
     - name: Nome do arquivo de backup do Newcon Core
       set_fact:
-        arquivo_newcon_core: "{{ data_hora_atual | regex_replace('[\\r\\n\\t]+','') }}"
+        arquivo_newcon_core: "{{ data_hora_atual.stdout | regex_replace('[\\r\\n\\t]+','') }}"
+   
+    - name: saida arquivo newcon core
+      debug: 
+        msg: "{{ arquivo_newcon_core }}"
 
     - name: Criar arquivo ZIP
       community.windows.win_zip:
