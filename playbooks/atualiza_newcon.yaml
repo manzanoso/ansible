@@ -44,7 +44,7 @@
       register: exists_bin_core
 
     - name: Obter data e hora atual
-      shell: date "+%Y-%m-%d %H:%M:%S"
+      win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
       register: data_hora_atual
 
     - name: Nome do arquivo de backup do Newcon Core
@@ -54,7 +54,7 @@
     - name: Criar arquivo ZIP
       community.windows.win_zip:
         src: C:\Newcon\Bin_Newcon_Core\*
-        dest: "{{ arquivo_newcon_core }}"
+        dest: "{{ arquivo_newcon_core | regex_replace('[\\r\\n\\t]+','') }}"
 
     - name: Copiar binarios para diretorio Core
       ansible.windows.win_copy:
