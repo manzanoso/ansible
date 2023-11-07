@@ -49,7 +49,11 @@
       register: data_hora_atual
 
     - name: Criar arquivo ZIP
-      win_command: powershell.exe -Command "Compress-Archive -Path 'C:\Newcon\Bin_Newcon_Core\' -DestinationPath 'C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout }}.zip'"
+      community.windows.win_zip:
+        src: C:\Newcon\Bin_Newcon_Core\*
+        dest: C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout }}.zip    
+     # community.windows.win_zip:    
+     # win_command: powershell.exe -Command "Compress-Archive -Path 'C:\Newcon\Bin_Newcon_Core\' -DestinationPath 'C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout }}.zip'"
 
     - name: Copiar binarios para diretorio Core
       ansible.windows.win_copy:
