@@ -54,7 +54,7 @@
       register: current_datetime
 
     - name: Compress files with timestamp in the filename
-      win_command: Compress-Archive -Path "C:\Newcon\Bin_Newcon_Core" -DestinationPath "C:\Newcon\Backups\archive_{{ current_datetime.stdout }}.zip"
+      win_command: powershell.exe -Command "Compress-Archive -Path 'C:\Newcon\Bin_Newcon_Core' -DestinationPath 'C:\Newcon\Backups\archive_{{ current_datetime.stdout }}.zip'"
 
 ###############################################3
     - name: Copiar binarios para diretorio Core
