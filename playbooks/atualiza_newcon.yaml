@@ -43,19 +43,21 @@
         patterns: "*.*"
       register: exists_bin_core
 
-    - name: Obter data e hora atual
-      win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
-      register: data_hora_atual
+########################################
 
-    - name: Nome do arquivo de backup do Newcon Core
-      set_fact:
-        arquivo_newcon_core: 'C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout }}.zip'
 
-    - name: Criar arquivo ZIP
-      community.windows.win_zip:
-        src: C:\Newcon\Bin_Newcon_Core\*
-        dest: arquivo_newcon_core
 
+###########################################3
+
+    - name: Get the current date and time
+      win_shell: Get-Date -Format "yyyyMMddHHmmss"
+      register: current_datetime
+
+    - name: Compress files with timestamp in the filename
+      win_command: Compress-Archive -Path "C:\Newcon\Bin_Newcon_Core\" -DestinationPath "C:\Newcon\Backups\archive_{{ current_datetime.stdout }}.zip"
+
+
+###############################################3
     - name: Copiar binarios para diretorio Core
       ansible.windows.win_copy:
         src: C:\Newcon_Versao\Releases\Bin_Newcon_Core\
