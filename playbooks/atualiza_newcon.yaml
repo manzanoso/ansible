@@ -38,12 +38,13 @@
         paths: C:\Newcon_Versao\Releases\
         patterns: "*.ver"
       register: exists_script_db
+      when: 0 > 1
 
     - name: Atualizar Script de BD
       win_shell: |
         $resultado = c:\Newcon_Versao\atualiza_script.ps1
       register: script_process    
-      when: exists_script_db.matched > 0
+      when: 0 > 1 ## when: exists_script_db.matched > 0
 
     - name: Valida se o script de BD foi atualizado com sucesso
       fail:
@@ -86,5 +87,18 @@
         src: C:\Newcon_Versao\Releases\Bin_Sch_Conins\
         dest: C:\Newcon\Bin_Sch_Conins\
         remote_src: true            
-      when: exists_bin_sch.matched > 0         
-       
+      when: exists_bin_sch.matched > 0
+
+    - name: Valida se tem pacotes web para atualizar
+      win_find:
+        paths: C:\Newcon_Versao\Releases\Web\
+        patterns: "Intranet_AutoAtendimento*.zip"
+      register: exists_web_autoatendimento
+
+    - name: Tem pacote web
+      debug:
+        msg: "Tem pacote web auto atendimento"
+      when: exists_web_autoatendimento.matched > 0
+
+
+## C:\Newcon_Versao\Releases\Web\Intranet_AutoAtendimento_004_030.zip
