@@ -44,13 +44,13 @@
       register: exists_bin_core
 
     - name: Obter data e hora atual
-      win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
+      win_shell: C:\Newcon\Backups\arquivo_"{{ Get-Date -Format "yyyyMMdd_HHmmss" | regex_replace('(\\r\\n)','') }}".zip
       register: data_hora_atual
 
     - name: Criar arquivo ZIP
       community.windows.win_zip:
         src: C:\Newcon\Bin_Newcon_Core\*
-        dest: C:\Newcon\Backups\arquivo_"{{ data_hora_atual.stdout | regex_replace('(\\r\\n)','') }}".zip
+        dest: data_hora_atual.stdout
 
     - name: Copiar binarios para diretorio Core
       ansible.windows.win_copy:
