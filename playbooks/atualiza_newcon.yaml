@@ -60,7 +60,7 @@
     - name: Criar arquivo ZIP
       community.windows.win_zip:
         src: C:\Newcon\Bin_Newcon_Core\*
-        dest: C:\Newcon\Backups\arquivo_"{{ arquivo_newcon_core }}".zip
+        dest: 'C:\Newcon\Backups\arquivo_{{ arquivo_newcon_core }}.zip'
 
 ########################################
 
