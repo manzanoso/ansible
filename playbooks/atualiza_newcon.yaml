@@ -2,6 +2,8 @@
 - name: Windows Feature
   hosts: win
   gather_facts: true
+  vars:
+    - destino: C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout  }}.zip | regex_replace('(\\r\\n)','')
   tasks:
     - name: Criar estrutura de diretorios
       ansible.windows.win_file:
@@ -49,12 +51,12 @@
 
     - name: print UIGUID
       debug:
-        msg: "{{ data_hora_atual.stdout | regex_replace('(\\r\\n)','') }}"
+        msg: "{{ destino }}"
 
     - name: Criar arquivo ZIP
       community.windows.win_zip:
         src: C:\Newcon\Bin_Newcon_Core\*
-        dest: C:\Newcon\Backups\arquivo_{{ data_hora_atual.stdout  }}.zip | regex_replace('(\\r\\n)','')
+        dest: "{{ destino }}"
 
     - name: Copiar binarios para diretorio Core
       ansible.windows.win_copy:
