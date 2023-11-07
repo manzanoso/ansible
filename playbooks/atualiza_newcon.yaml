@@ -44,7 +44,7 @@
       register: exists_bin_core
 
     - name: Obter data e hora atual
-      win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
+      shell: date "+%Y-%m-%d %H:%M:%S"
       register: data_hora_atual
 
     - name: Nome do arquivo de backup do Newcon Core
