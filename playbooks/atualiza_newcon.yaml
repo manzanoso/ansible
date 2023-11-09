@@ -129,6 +129,7 @@
       win_iis_webapppool:
         name: newcon.web.api
         state: stopped
+      when: exists_newcon_web_api.matched > 0      
 
     ## Faz o backup Intranet_Newcon.Web.Api (pacote atual)
     - name: Criar arquivo ZIP Intranet_Newcon.Web.Api
@@ -142,13 +143,14 @@
       community.windows.win_unzip:
         src: C:\Newcon_Versao\Releases\Web\Intranet_Newcon.Web.Api_004_030.zip
         dest: C:\Newcon_Web    
-    
+      when: exists_newcon_web_api.matched > 0
+
     ## Iniciar o application pool - Intranet_Newcon.Web.Api
     - name: Iniciar Application Pool
       win_iis_webapppool:
         name: newcon.web.api
         state: started
-
+      when: exists_newcon_web_api.matched > 0
 
 
 
