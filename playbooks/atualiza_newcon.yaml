@@ -120,12 +120,6 @@
         patterns: "Intranet_Newcon.Web.Api*.zip"
       register: exists_newcon_web_api
   
-    ## Valida se tem o pacote 
-    - name: Tem pacote web
-      debug:
-        msg: "Tem pacote web auto atendimento"
-      when: exists_newcon_web_api.matched > 0
-
     ## Parar o application pool - Intranet_Newcon.Web.Api
     - name: Parar Application Pool
       win_iis_webapppool:
