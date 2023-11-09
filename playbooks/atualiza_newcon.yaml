@@ -141,7 +141,7 @@
     ## Atualiza pacote web - Intranet_Newcon.Web.Api
     - name: Descompactar pacote
       win_shell: |
-        7z x C:\Newcon_Versao\Releases\Web\Intranet_Newcon.Web.Api_004_030.zip -oC:\Newcon_Web\ -xr!web.config -xr!appsettings.json -xr!nlog.json -xr!log.config
+        7z x C:\Newcon_Versao\Releases\Web\Intranet_Newcon.Web.Api_004_030.zip -oC:\Newcon_Web\ -aoa '-xr!web.config' '-xr!appsettings.json' '-xr!nlog.json' '-xr!log.config'
       when: exists_newcon_web_api.matched > 0
 
     ## Iniciar o application pool - Intranet_Newcon.Web.Api
