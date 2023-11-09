@@ -151,6 +151,3 @@
         name: newcon.web.api
         state: started
       when: exists_newcon_web_api.matched > 0
-
-
-
