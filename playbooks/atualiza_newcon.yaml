@@ -3,6 +3,7 @@
   hosts: win
   gather_facts: true
   tasks:
+    ## Somente teste
     - name: Saida Variavel
       debug:
         msg: '{{ diretorio_origem }}'
@@ -20,23 +21,24 @@
     ## Criar estrutura de diretorios
     - name: Criar estrutura de diretorios
       ansible.windows.win_file:
-        path: C:\NewDeploy\Pacotes
+        path: C:\Newcon_Versao\
         state: directory      
-      when: 0 > 1
+    #  when: 0 > 1
    
     ## Download do pacote de versão
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
         url: https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000003.zip
-        dest: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000003.zip
-      when: 0 > 1
+        dest: C:\Newcon_Versao\Releases\SCRIPT_004_030_SEQ_000003.zip
+    #  when: 0 > 1
 
     ## Descompactar pacote
     - name: Descompactar pacote
       community.windows.win_unzip:
-        src: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000003.zip
+        src: C:\Newcon_Versao\Releases\SCRIPT_004_030_SEQ_000003.zip
         dest: C:\Newcon_Versao\Releases\
-      when: 0 > 1
+        delete_archive: yes
+    #  when: 0 > 1
     
     ####################################################
     ## Valida se tem script de BD
@@ -46,19 +48,19 @@
         paths: C:\Newcon_Versao\Releases\
         patterns: "*.ver"
       register: exists_script_db
-      when: 0 > 1
+    #  when: 0 > 1
 
     ## Se tiver script atualiza
     - name: Atualizar Script de BD
       win_shell: |
         $resultado = c:\Newcon_Versao\atualiza_script.ps1
       register: script_process    
-      when: 0 > 1 ## when: exists_script_db.matched > 0
+      when: exists_script_db.matched > 0
 
     ## Valida se o script foi processado com sucesso
     - name: Valida se o script de BD foi atualizado com sucesso
       fail:
-      when: 0 > 1 #script_process.stdout == 'Processo finalizado sem sucesso.\n'      
+      when: script_process.stdout == 'Processo finalizado sem sucesso.\n'      
 
     ####################################################
     ## Valida se tem binarios do Newcon Core
