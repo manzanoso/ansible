@@ -142,7 +142,7 @@
     - name: Descompactar pacote
       community.windows.win_unzip:
         src: C:\Newcon_Versao\Releases\Web\Intranet_Newcon.Web.Api_004_030.zip
-        dest: C:\Newcon_Web    
+        dest: C:\Newcon_Web\
       when: exists_newcon_web_api.matched > 0
 
     ## Iniciar o application pool - Intranet_Newcon.Web.Api
