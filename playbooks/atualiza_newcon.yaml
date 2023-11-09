@@ -7,32 +7,40 @@
       debug:
         msg: '{{ diretorio_origem }}'
 
+    ## Obter a data e hora atual
     - name: Obter data e hora atual
       win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
       register: data_hora
 
+    ## Remover caracteres do final da string data e hora
     - name: Remove caracteres de controle no final da string Date
       set_fact:
         data_hora_atual: "{{ data_hora.stdout | regex_replace('[\\r\\n\\t]+','') }}"
 
+    ## Criar estrutura de diretorios
     - name: Criar estrutura de diretorios
       ansible.windows.win_file:
         path: C:\NewDeploy\Pacotes
         state: directory      
       when: 0 > 1
-
+   
+    ## Download do pacote de versão
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
         url: https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000003.zip
         dest: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000003.zip
       when: 0 > 1
 
+    ## Descompactar pacote
     - name: Descompactar pacote
       community.windows.win_unzip:
         src: C:\NewDeploy\Pacotes\SCRIPT_004_030_SEQ_000003.zip
         dest: C:\Newcon_Versao\Releases\
       when: 0 > 1
-
+    
+    ####################################################
+    ## Valida se tem script de BD
+    ####################################################
     - name: Valida se tem Script de BD
       win_find:
         paths: C:\Newcon_Versao\Releases\
@@ -40,28 +48,35 @@
       register: exists_script_db
       when: 0 > 1
 
+    ## Se tiver script atualiza
     - name: Atualizar Script de BD
       win_shell: |
         $resultado = c:\Newcon_Versao\atualiza_script.ps1
       register: script_process    
       when: 0 > 1 ## when: exists_script_db.matched > 0
 
+    ## Valida se o script foi processado com sucesso
     - name: Valida se o script de BD foi atualizado com sucesso
       fail:
       when: 0 > 1 #script_process.stdout == 'Processo finalizado sem sucesso.\n'      
 
+    ####################################################
+    ## Valida se tem binarios do Newcon Core
+    ####################################################   
     - name: Valida se tem binarios do Newcon Core
       win_find:
         paths: C:\Newcon_Versao\Releases\Bin_Newcon_Core\
         patterns: "*.*"
       register: exists_bin_core
 
+    ## Faz o backup do newcon core (pacote atual)
     - name: Criar arquivo ZIP Newcon Core
       community.windows.win_zip:
         src: C:\Newcon\Bin_Newcon_Core\*
         dest: 'C:\Newcon\Backups\newcon_core_{{ data_hora_atual }}.zip'
       when: exists_bin_core.matched > 0   
-
+ 
+    ## Atualiza o pacote do newcon core (pacote novo)
     - name: Copiar binarios para diretorio do Newcon Core
       ansible.windows.win_copy:
         src: C:\Newcon_Versao\Releases\Bin_Newcon_Core\
@@ -70,18 +85,23 @@
         remote_src: true            
       when: exists_bin_core.matched > 0   
 
+    ####################################################
+    ## Valida se tem binarios do Schedulers e Conins
+    ####################################################       
     - name: Tem binarios do Schedulers e Conins
       win_find:
         paths: C:\Newcon_Versao\Releases\Bin_Sch_Conins\
         patterns: "*.*"
       register: exists_bin_sch
 
+    ## Faz o backup dos binários do sch e conins
     - name: Criar arquivo ZIP Sch Conins
       community.windows.win_zip:
         src: C:\Newcon\Bin_Sch_Conins\*
         dest: 'C:\Newcon\Backups\sch_conins_{{ data_hora_atual }}.zip'
       when: exists_bin_sch.matched > 0   
 
+    ## Atualiza o pacote do sch e conins
     - name: Copiar binarios para diretorio sch_conins
       ansible.windows.win_copy:
         src: C:\Newcon_Versao\Releases\Bin_Sch_Conins\
@@ -89,16 +109,46 @@
         remote_src: true            
       when: exists_bin_sch.matched > 0
 
+    ####################################################
+    ## Valida se tem pacotes web
+    ####################################################        
     - name: Valida se tem pacotes web para atualizar
       win_find:
         paths: C:\Newcon_Versao\Releases\Web\
-        patterns: "Intranet_AutoAtendimento*.zip"
-      register: exists_web_autoatendimento
-
+        patterns: "Internet_Newcon.Web.Api*.zip"
+      register: exists_newcon_web_api
+  
+    ## Valida se tem o pacote 
     - name: Tem pacote web
       debug:
         msg: "Tem pacote web auto atendimento"
-      when: exists_web_autoatendimento.matched > 0
+      when: exists_newcon_web_api.matched > 0
+
+    ## Parar o application pool - Intranet_Newcon.Web.Api
+    - name: Parar Application Pool
+      win_iis_webapppool:
+        name: newcon.web.api
+        state: stopped
+
+    ## Faz o backup Intranet_Newcon.Web.Api (pacote atual)
+    - name: Criar arquivo ZIP Intranet_Newcon.Web.Api
+      community.windows.win_zip:
+        src: C:\Newcon_Web\Newcon.Web.Api*
+        dest: 'C:\Newcon\Backups\Intranet_Newcon.Web.Api_{{ data_hora_atual }}.zip'
+      when: exists_newcon_web_api.matched > 0           
+
+    ## Atualiza pacote web - Intranet_Newcon.Web.Api
+    - name: Descompactar pacote
+      community.windows.win_unzip:
+        src: C:\Newcon_Versao\Releases\Web\Intranet_Newcon.Web.Api_004_030.zip
+        dest: C:\Newcon_Web    
+    
+    ## Iniciar o application pool - Intranet_Newcon.Web.Api
+    - name: Iniciar Application Pool
+      win_iis_webapppool:
+        name: newcon.web.api
+        state: started
 
 
-## C:\Newcon_Versao\Releases\Web\Intranet_AutoAtendimento_004_030.zip
+
+
