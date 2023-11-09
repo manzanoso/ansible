@@ -134,7 +134,7 @@
     ## Faz o backup Intranet_Newcon.Web.Api (pacote atual)
     - name: Criar arquivo ZIP Intranet_Newcon.Web.Api
       community.windows.win_zip:
-        src: C:\Newcon_Web\Newcon.Web.Api*
+        src: C:\Newcon_Web\Newcon.Web.Api\*
         dest: 'C:\Newcon\Backups\Intranet_Newcon.Web.Api_{{ data_hora_atual }}.zip'
       when: exists_newcon_web_api.matched > 0           
 
