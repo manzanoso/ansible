@@ -38,13 +38,9 @@ if ($ultimaLinha -ne $null) {
 
 # Exibe o resultado
 if ($ultimaLinha -ne $null) {
-   # Write-Host "A última ocorrência da palavra '$palavraAlvo' está na linha $ultimaLinha."
     if ($fraseNaUltimaLinha -ne $null) {
         Write-Host $fraseNaUltimaLinha
     } else {
-        Write-Host "Processo finalizado sem sucesso."  # A frase '$fraseAlvo' não foi encontrada na última linha."
+        Write-Host "Processo finalizado sem sucesso."
     }
-} else {
-   # Write-Host "A palavra '$palavraAlvo' não foi encontrada no arquivo."
-}
-
+} 
