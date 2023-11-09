@@ -147,3 +147,16 @@
         name: newcon.web.api
         state: started
       when: exists_newcon_web_api.matched > 0
+
+    ## Verifica se a o Newcon Web subiu OK
+    - name: Verificar status da URL
+      uri:
+        url: "http://localhost/newcon.web/"
+        return_content: no
+      register: response
+
+    ## Exibe mensagem se estiver OK
+    - name: Exibir mensagem com base no status da URL
+      debug:
+        msg: "A URL está retornando 200 OK"
+      when: response.status == 200     
