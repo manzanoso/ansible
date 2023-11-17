@@ -35,7 +35,7 @@
 
     - name: Verificar programas abertos
       win_shell: |
-        $programas = Get-Content -Path 'C:\Newcon_Versao\executaveis_versao.txt'
+        $programas = Get-Content -Path 'C:\Newcon_Versao\executaveis_versao.txt' | Where-Object { $_ -match '\S' }
         $programasAbertos = @()
         foreach ($programa in $programas) {
             $processo = Get-Process -Name $programa -ErrorAction SilentlyContinue
