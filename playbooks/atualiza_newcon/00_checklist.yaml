@@ -23,3 +23,11 @@
         dest: C:\Newcon_Versao\Releases\
         delete_archive: yes
     #  when: 0 > 1
+
+    ## Lista os executaveis em um diretorio e inserem em um arquivo txt
+    - name: Listar programas em um diretório e inserir em um arquivo txt
+      hosts: seu_host_windows
+      gather_facts: no
+      tasks:
+        - name: Listar programas
+          win_shell: Get-ChildItem "C:\Newcon_Versao\Releases\Bin_Sch_Conins" | Select-Object Name | Out-File -FilePath "C:\Newcon_Versao\executaveis_versao.txt"
