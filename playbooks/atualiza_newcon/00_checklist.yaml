@@ -42,3 +42,7 @@
       debug:
         msg: "Os seguintes programas estão abertos: {{ programas_abertos.stdout }}"
       when: programas_abertos.stdout | length > 0
+
+    - name: Abend em caso de arquivo aberto
+      fail:
+      when: programas_abertos.stdout | length > 0
