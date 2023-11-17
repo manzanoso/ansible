@@ -1,0 +1,29 @@
+- name: Windows Feature
+  hosts: win
+  gather_facts: true
+  tasks:
+    ####################################################
+    ## Valida se tem binarios do Newcon Core
+    ####################################################   
+    - name: Valida se tem binarios do Newcon Core
+      win_find:
+        paths: C:\Newcon_Versao\Releases\Bin_Newcon_Core\
+        patterns: "*.*"
+      register: exists_bin_core
+
+    ## Faz o backup do newcon core (pacote atual)
+    - name: Criar arquivo ZIP Newcon Core
+      community.windows.win_zip:
+        src: C:\Newcon\Bin_Newcon_Core\*
+        dest: 'C:\Newcon\Backups\newcon_core_{{ data_hora_atual }}.zip'
+      when: exists_bin_core.matched > 0   
+ 
+    ## Atualiza o pacote do newcon core (pacote novo)
+    - name: Copiar binarios para diretorio do Newcon Core
+      ansible.windows.win_copy:
+        src: C:\Newcon_Versao\Releases\Bin_Newcon_Core\
+        dest: C:\Newcon\Bin_Newcon_Core\
+        backup: yes
+        remote_src: true            
+      when: exists_bin_core.matched > 0   
+

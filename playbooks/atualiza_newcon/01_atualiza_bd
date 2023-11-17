@@ -1,0 +1,26 @@
+- name: Windows Feature
+  hosts: win
+  gather_facts: true
+  tasks:
+    ####################################################
+    ## Valida se tem script de BD
+    ####################################################
+    - name: Valida se tem Script de BD
+      win_find:
+        paths: C:\Newcon_Versao\Releases\
+        patterns: "*.ver"
+      register: exists_script_db
+    #  when: 0 > 1
+
+    ## Se tiver script atualiza
+    - name: Atualizar Script de BD
+      win_shell: |
+        $resultado = c:\Newcon_Versao\atualiza_script.ps1
+      register: script_process    
+      when: exists_script_db.matched > 0
+
+    ## Valida se o script foi processado com sucesso
+    - name: Valida se o script de BD foi atualizado com sucesso
+      fail:
+      when: script_process.stdout == 'Processo finalizado sem sucesso.\n'      
+

@@ -1,0 +1,53 @@
+- name: Windows Feature
+  hosts: win
+  gather_facts: true
+  tasks:
+    ####################################################
+    ## Valida se tem pacotes web
+    ####################################################        
+    - name: Valida se tem pacotes web para atualizar
+      win_find:
+        paths: C:\Newcon_Versao\Releases\Web\
+        patterns: "Intranet_Newcon.Web.Api*.zip"
+      register: exists_newcon_web_api
+  
+    ## Parar o application pool - Intranet_Newcon.Web.Api
+    - name: Parar Application Pool
+      win_iis_webapppool:
+        name: newcon.web.api
+        state: stopped
+      when: exists_newcon_web_api.matched > 0      
+
+    ## Faz o backup Intranet_Newcon.Web.Api (pacote atual)
+    - name: Criar arquivo ZIP Intranet_Newcon.Web.Api
+      community.windows.win_zip:
+        src: C:\Newcon_Web\Newcon.Web.Api\*
+        dest: 'C:\Newcon\Backups\Intranet_Newcon.Web.Api_{{ data_hora_atual }}.zip'
+      when: exists_newcon_web_api.matched > 0           
+
+    ## Atualiza pacote web - Intranet_Newcon.Web.Api
+    #### ATENÇÃO!! Pre-req: ter instalado o 7zip no servidor de destino + o 7zip configurado no path
+    - name: Descompactar pacote
+      win_shell: |
+        7z x C:\Newcon_Versao\Releases\Web\Intranet_Newcon.Web.Api_004_030.zip -oC:\Newcon_Web\ -aoa '-xr!web.config' '-xr!appsettings.json' '-xr!nlog.json' '-xr!log.config'
+      when: exists_newcon_web_api.matched > 0
+
+    ## Iniciar o application pool - Intranet_Newcon.Web.Api
+    - name: Iniciar Application Pool
+      win_iis_webapppool:
+        name: newcon.web.api
+        state: started
+      when: exists_newcon_web_api.matched > 0
+
+    ## Verifica se a o Newcon Web subiu OK
+    - name: Verificar status da URL
+      ansible.windows.win_uri:
+        url: "http://localhost/newcon.web/"
+        return_content: no
+      register: response
+
+    ## Exibe mensagem se estiver OK
+    - name: Exibir mensagem com base no status da URL
+      debug:
+        msg: "A URL está retornando 200 OK"
+      when: response.status_code == 200     

@@ -1,0 +1,40 @@
+- name: Windows Feature
+  hosts: win
+  gather_facts: true
+  tasks:
+    ## Somente teste
+    - name: Saida Variavel
+      debug:
+        msg: '{{ diretorio_origem }}'
+
+    ## Obter a data e hora atual
+    - name: Obter data e hora atual
+      win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
+      register: data_hora
+
+    ## Remover caracteres do final da string data e hora
+    - name: Remove caracteres de controle no final da string Date
+      set_fact:
+        data_hora_atual: "{{ data_hora.stdout | regex_replace('[\\r\\n\\t]+','') }}"
+
+    ## Criar estrutura de diretorios
+    - name: Criar estrutura de diretorios
+      ansible.windows.win_file:
+        path: C:\Newcon_Versao\
+        state: directory      
+    #  when: 0 > 1
+   
+    ## Download do pacote de versão
+    - name: Download do pacote da versao
+      ansible.windows.win_get_url:
+        url: https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000003.zip
+        dest: C:\Newcon_Versao\Releases\SCRIPT_004_030_SEQ_000003.zip
+    #  when: 0 > 1
+
+    ## Descompactar pacote
+    - name: Descompactar pacote
+      community.windows.win_unzip:
+        src: C:\Newcon_Versao\Releases\SCRIPT_004_030_SEQ_000003.zip
+        dest: C:\Newcon_Versao\Releases\
+        delete_archive: yes
+    #  when: 0 > 1
