@@ -1,5 +1,5 @@
 - name: Windows Feature
-  hosts: win
+  hosts: newcon_core
   gather_facts: true
   tasks:
     ####################################################
