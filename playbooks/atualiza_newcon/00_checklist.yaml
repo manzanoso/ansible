@@ -2,16 +2,6 @@
   hosts: win
   gather_facts: false
   tasks:
-    ## Obter a data e hora atual
-    - name: Obter data e hora atual
-      win_shell: Get-Date -Format "yyyyMMdd_HHmmss"
-      register: data_hora
-
-    ## Remover caracteres do final da string data e hora
-    - name: Remove caracteres de controle no final da string Date
-      set_fact:
-        data_hora_atual: "{{ data_hora.stdout | regex_replace('[\\r\\n\\t]+','') }}"
-
     ## Criar estrutura de diretorios
     - name: Criar estrutura de diretorios
       ansible.windows.win_file:
