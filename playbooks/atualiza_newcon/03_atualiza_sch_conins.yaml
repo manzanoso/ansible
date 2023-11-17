@@ -1,6 +1,6 @@
 - name: Windows Feature
   hosts: sch_conins
-  gather_facts: true
+  gather_facts: false
   tasks:
     ## Obter a data e hora atual
     - name: Obter data e hora atual
