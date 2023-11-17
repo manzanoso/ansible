@@ -1,5 +1,5 @@
 - name: Windows Feature
-  hosts: win
+  hosts: db
   gather_facts: true
   tasks:
     ####################################################
