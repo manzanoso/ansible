@@ -25,17 +25,9 @@
     #  when: 0 > 1
 
     ## Lista os executaveis em um diretorio e inserem em um arquivo txt
-    - name: Listar programas em um diretório e inserir em um arquivo txt
-      win_shell: Get-ChildItem -Path "C:\Newcon_Versao\Releases\Bin_Sch_Conins\*.exe" | Where-Object {! $_.PSIsContainer} | ForEach-Object { $_.Name -replace '\.\w+$' } | Where-Object { $_ -match '\S' } | Out-File -FilePath "C:\Newcon_Versao\executaveis_versao.txt"
-
-    - name: Ler lista de programas a partir do arquivo
-      slurp:
-        src: C:\Newcon_Versao\executaveis_versao.txt
-      register: programas_file_content
-
     - name: Verificar programas abertos
       win_shell: |
-        $programas = Get-Content -Path 'C:\Newcon_Versao\executaveis_versao.txt'
+        $programas = Get-ChildItem -Path "C:\Newcon_Versao\Releases\Bin_Sch_Conins\*.exe" | Where-Object {! $_.PSIsContainer} | ForEach-Object { $_.Name -replace '\.\w+$' } | Where-Object { $_ -match '\S' }
         $programasAbertos = @()
         foreach ($programa in $programas) {
             $processo = Get-Process -Name $programa -ErrorAction SilentlyContinue
@@ -45,7 +37,6 @@
         }
         $programasAbertos
       register: programas_abertos
-      when: programas_file_content.content is defined
 
     - name: Exibir programas abertos
       debug:
