@@ -24,7 +24,7 @@
         delete_archive: yes
     #  when: 0 > 1
 
-    ## Lista os executaveis em um diretorio e inserem em um arquivo txt
+    ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
     - name: Verificar programas abertos
       win_shell: |
         $programas = Get-ChildItem -Path "C:\Newcon_Versao\Releases\Bin_Sch_Conins\*.exe" | Where-Object {! $_.PSIsContainer} | ForEach-Object { $_.Name -replace '\.\w+$' } | Where-Object { $_ -match '\S' }
@@ -38,11 +38,13 @@
         $programasAbertos
       register: programas_abertos
 
+    ## Exibe os programas abertos
     - name: Exibir programas abertos
       debug:
         msg: "Os seguintes programas estão abertos: {{ programas_abertos.stdout }}"
       when: programas_abertos.stdout | length > 0
 
+    ## Caso tenha programa aberto finaliza o processo com erro
     - name: Abend em caso de arquivo aberto
       fail:
       when: programas_abertos.stdout | length > 0
