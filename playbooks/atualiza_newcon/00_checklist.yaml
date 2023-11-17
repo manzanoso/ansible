@@ -26,4 +26,4 @@
 
     ## Lista os executaveis em um diretorio e inserem em um arquivo txt
     - name: Listar programas em um diretório e inserir em um arquivo txt
-      win_shell: Get-ChildItem "C:\Newcon_Versao\Releases\Bin_Sch_Conins" | Select-Object Name | Out-File -FilePath "C:\Newcon_Versao\executaveis_versao.txt"
+      win_shell: Get-ChildItem "C:\Newcon_Versao\Releases\Bin_Sch_Conins" | Select-Object Name -ExpandProperty Name | Out-File -FilePath "C:\Newcon_Versao\executaveis_versao.txt"
