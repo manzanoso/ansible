@@ -1,6 +1,6 @@
 - name: Windows Feature
   hosts: db
-  gather_facts: true
+  gather_facts: false
   tasks:
     ####################################################
     ## Valida se tem script de BD
