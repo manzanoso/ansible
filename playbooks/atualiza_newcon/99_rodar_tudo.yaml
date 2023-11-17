@@ -1,0 +1,7 @@
+- hosts: win
+  tasks:
+    - name: Executar 00_checklist.yaml
+      include_tasks: 00_checklist.yaml
+
+    - name: Executar 01_atualiza_bd.yaml
+      include_tasks: 01_atualiza_bd.yaml
