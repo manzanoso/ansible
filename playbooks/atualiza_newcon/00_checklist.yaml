@@ -26,7 +26,7 @@
 
     ## Lista os executaveis em um diretorio e inserem em um arquivo txt
     - name: Listar programas em um diretório e inserir em um arquivo txt
-      win_shell: Get-ChildItem "C:\Newcon_Versao\Releases\Bin_Sch_Conins\*.exe" | Select-Object Name | ft -hide | Out-File -FilePath "C:\Newcon_Versao\executaveis_versao.txt"
+      win_shell: Get-ChildItem "C:\Newcon_Versao\Releases\Bin_Sch_Conins\*.exe" | Select-Object {($_.Name -replace '\.[^.]*$')} | ft -hide | Out-File -FilePath "C:\Newcon_Versao\executaveis_versao.txt"
 
     - name: Ler lista de programas a partir do arquivo
       slurp:
