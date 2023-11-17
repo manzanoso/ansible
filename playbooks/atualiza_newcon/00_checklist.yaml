@@ -27,3 +27,27 @@
     ## Lista os executaveis em um diretorio e inserem em um arquivo txt
     - name: Listar programas em um diretório e inserir em um arquivo txt
       win_shell: Get-ChildItem "C:\Newcon_Versao\Releases\Bin_Sch_Conins\*.exe" | Select-Object Name -ExpandProperty Name | Out-File -FilePath "C:\Newcon_Versao\executaveis_versao.txt"
+
+    - name: Ler lista de programas a partir do arquivo
+      slurp:
+        src: C:\Newcon_Versao\executaveis_versao.txt
+      register: programas_file_content
+
+    - name: Verificar programas abertos
+      win_shell: |
+        $programas = Get-Content -Path 'C:\Newcon_Versao\executaveis_versao.txt'
+        $programasAbertos = @()
+        foreach ($programa in $programas) {
+            $processo = Get-Process -Name $programa -ErrorAction SilentlyContinue
+            if ($processo) {
+                $programasAbertos += $programa
+            }
+        }
+        $programasAbertos
+      register: programas_abertos
+      when: programas_file_content.content is defined
+
+    - name: Exibir programas abertos
+      debug:
+        msg: "Os seguintes programas estão abertos: {{ programas_abertos.stdout }}"
+      when: programas_abertos.stdout | length > 0
