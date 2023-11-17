@@ -1,4 +1,5 @@
-- hosts: all
+- name: Windows Feature
+  hosts: all
   gather_facts: no
   tasks:
     - name: Executar 00_checklist.yaml
