@@ -1,0 +1,35 @@
+- name: Verificar programas abertos no Windows a partir de uma lista em um arquivo
+  hosts: seu_host_windows
+  gather_facts: no
+  tasks:
+    - name: Ler lista de programas a partir do arquivo
+      slurp:
+        src: /caminho/para/o/arquivo/programas.txt
+      register: programas_file_content
+
+    - name: Verificar programas abertos
+      win_shell: |
+        $programas = Get-Content -Path 'C:\caminho\para\o\arquivo\programas.txt'
+        $programasAbertos = @()
+        foreach ($programa in $programas) {
+            $processo = Get-Process -Name $programa -ErrorAction SilentlyContinue
+            if ($processo) {
+                $programasAbertos += $programa
+            }
+        }
+        $programasAbertos
+      register: programas_abertos
+      when: programas_file_content.content is defined
+
+    - name: Exibir programas abertos
+      debug:
+        msg: "Os seguintes programas estão abertos: {{ programas_abertos.stdout }}"
+      when: programas_abertos.stdout | length > 0
+
+
+- name: Listar programas em um diretório e inserir em um arquivo txt
+  hosts: seu_host_windows
+  gather_facts: no
+  tasks:
+    - name: Listar programas
+      win_shell: Get-ChildItem "C:\caminho\para\o\diretorio\de\programas" | Select-Object Name | Out-File -FilePath "C:\caminho\para\o\diretorio\de\programas\lista_programas.txt"
