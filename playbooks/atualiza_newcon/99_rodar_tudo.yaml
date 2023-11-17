@@ -1,4 +1,6 @@
-- tasks:
+- hosts: all
+  gather_facts: no
+  tasks:
     - name: Executar 00_checklist.yaml
       include_tasks: 00_checklist.yaml
 
