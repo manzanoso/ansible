@@ -1,7 +1,5 @@
 - hosts: all
   tasks:
-#    - debug:
-#        msg: play1
 
 - name: Include a play after another play
   import_playbook: 00_checklist.yaml
