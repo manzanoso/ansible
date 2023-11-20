@@ -1,7 +1,7 @@
-- name: Windows Feature
-  hosts: win
-  gather_facts: false
-  tasks:
+#- name: Windows Feature
+#  hosts: win
+#  gather_facts: false
+#  tasks:
     ## Criar estrutura de diretorios
     - name: Criar estrutura de diretorios
       ansible.windows.win_file:
