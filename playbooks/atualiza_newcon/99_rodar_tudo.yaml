@@ -1,9 +1,11 @@
 - hosts: all
   tasks:
-    - debug:
-        msg: play1
+#    - debug:
+#        msg: play1
 
 - name: Include a play after another play
   import_playbook: 00_checklist.yaml
 
+- name: 01_atualiza_bd.yaml
+  import_playbook: 01_atualiza_bd.yaml
 
