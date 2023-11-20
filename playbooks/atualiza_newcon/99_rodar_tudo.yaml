@@ -1,7 +1,6 @@
-- hosts: all
+- name: Windows Feature
+  hosts: all
   tasks:
-##    - name: Executar 00_checklist.yaml
-##      shell: 00_checklist.yaml
+    - name: Executar 00_checklist.yaml
+      shell: 00_checklist.yaml
 
-    - name: Executar 01_atualiza_bd.yaml
-      shell: 01_atualiza_bd.yaml
