@@ -1,7 +1,7 @@
 - hosts: all
   tasks:
     - name: Executar 00_checklist.yaml
-      ansible.builtin.import_playbook: 00_checklist.yaml
+      command: 00_checklist.yaml
 
     - name: Executar 01_atualiza_bd.yaml
-      ansible.builtin.import_playbook: 01_atualiza_bd.yaml
+      command: 01_atualiza_bd.yaml
