@@ -1,5 +1,4 @@
 - hosts: all
-  gather_facts: no
   tasks:
     - name: Executar 00_checklist.yaml
       import_playbook: 00_checklist.yaml
