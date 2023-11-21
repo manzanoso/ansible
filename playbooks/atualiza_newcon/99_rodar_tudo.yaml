@@ -15,6 +15,3 @@
 
 - name: 04_atualiza_web.yaml
   import_playbook: 04_atualiza_web.yaml
-
-- name: 01_atualiza_bd.yaml
-  import_playbook: 01_atualiza_bd.yaml
