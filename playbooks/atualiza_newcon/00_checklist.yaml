@@ -7,7 +7,7 @@
     ## Download do pacote de versão
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
-        url: {{ url_ftp }}
+        url: "{{ url_ftp }}"
         dest: C:\Newcon_Deploy\Releases\SCRIPT_004_030_SEQ_000003.zip
 
     ## Descompactar pacote
