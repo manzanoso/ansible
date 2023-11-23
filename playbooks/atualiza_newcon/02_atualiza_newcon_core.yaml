@@ -33,7 +33,6 @@
       ansible.windows.win_copy:
         src: C:\Newcon_Deploy\Releases\Bin_Newcon_Core\
         dest: C:\Newcon\Bin_Newcon_Core\
-        backup: yes
         remote_src: true            
       when: exists_bin_core.matched > 0   
 
