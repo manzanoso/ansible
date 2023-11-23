@@ -4,7 +4,7 @@
 ## Testa variável
 - name: Passa variável para outro playbook
   set_fact:
-    teste_var: "Teste OK" 
+    teste_var: 'Teste OK'
 
 - name: 00_checklist.yaml
   import_playbook: 00_checklist.yaml
