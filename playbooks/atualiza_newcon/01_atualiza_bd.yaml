@@ -10,7 +10,6 @@
         paths: C:\Newcon_Deploy\Releases\
         patterns: "*.ver"
       register: exists_script_db
-    #  when: 0 > 1
 
     ## Se tiver script atualiza
     - name: Atualizar Script de BD

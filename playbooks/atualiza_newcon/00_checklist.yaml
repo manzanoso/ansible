@@ -7,7 +7,6 @@
       ansible.windows.win_get_url:
         url: https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000003.zip
         dest: C:\Newcon_Deploy\Releases\SCRIPT_004_030_SEQ_000003.zip
-    #  when: 0 > 1
 
     ## Descompactar pacote
     - name: Descompactar pacote
@@ -15,7 +14,6 @@
         src: C:\Newcon_Deploy\Releases\SCRIPT_004_030_SEQ_000003.zip
         dest: C:\Newcon_Deploy\Releases\
         delete_archive: yes
-    #  when: 0 > 1
 
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
     - name: Verificar programas abertos
