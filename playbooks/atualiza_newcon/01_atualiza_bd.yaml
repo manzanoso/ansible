@@ -21,5 +21,5 @@
     ## Valida se o script foi processado com sucesso
     - name: Valida se o script de BD foi atualizado com sucesso
       fail:
-      when: script_process.stdout != 'Processo finalizado com sucesso\n'      
+      when: script_process.stdout != 'Processo finalizado com sucesso.\n'      
 
