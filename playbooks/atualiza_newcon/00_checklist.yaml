@@ -1,11 +1,17 @@
 - name: Windows Feature
   hosts: win
+  vars_files:
+    - /vars/variaveis.yaml  
   gather_facts: false
   tasks:
+    - name: Setar variaveis
+      set_fact: 
+        
+
      ## Download do pacote de versão
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
-        url: https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000003.zip
+        url: {{ url_ftp }}
         dest: C:\Newcon_Deploy\Releases\SCRIPT_004_030_SEQ_000003.zip
 
     ## Descompactar pacote
