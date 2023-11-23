@@ -8,7 +8,7 @@
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
         url: "{{ url_ftp }}"
-        dest: "{{ dir_newcon_deploy }}"\SCRIPT_004_030_SEQ_000003.zip
+        dest: "{{ dir_newcon_deploy }}\SCRIPT_004_030_SEQ_000003.zip"
 
     ## Descompactar pacote
     - name: Descompactar pacote
