@@ -5,17 +5,17 @@
     set_fact:
       teste_var: "Teste OK"
 
-- name: 00_checklist.yaml
-  import_playbook: 00_checklist.yaml
-
-- name: 01_atualiza_bd.yaml
-  import_playbook: 01_atualiza_bd.yaml
-
-- name: 02_atualiza_newcon_core.yaml
-  import_playbook: 02_atualiza_newcon_core.yaml
-
-- name: 03_atualiza_sch_conins.yaml
-  import_playbook: 03_atualiza_sch_conins.yaml
-
-- name: 04_atualiza_web.yaml
-  import_playbook: 04_atualiza_web.yaml
+  - name: 00_checklist.yaml
+    import_playbook: 00_checklist.yaml
+  
+  - name: 01_atualiza_bd.yaml
+    import_playbook: 01_atualiza_bd.yaml
+  
+  - name: 02_atualiza_newcon_core.yaml
+    import_playbook: 02_atualiza_newcon_core.yaml
+  
+  - name: 03_atualiza_sch_conins.yaml
+    import_playbook: 03_atualiza_sch_conins.yaml
+  
+  - name: 04_atualiza_web.yaml
+    import_playbook: 04_atualiza_web.yaml
