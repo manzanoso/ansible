@@ -4,7 +4,6 @@
     - vars/variaveis.yaml  
   gather_facts: false
   tasks:
-  
     ## Download do pacote de versão
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
