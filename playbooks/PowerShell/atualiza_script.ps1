@@ -1,11 +1,11 @@
 # Define o caminho do programa que você deseja executar
-$programPath = "C:\Newcon_Versao\executa_troca_versao.bat"
+$programPath = "C:\Newcon_Deploy\executa_troca_versao.bat"
 
 # Inicie o programa com os parâmetros
 Start-Process -FilePath $programPath -WindowStyle Hidden -Wait
 
 # Define o caminho para o arquivo
-$filePath = "C:\Newcon_Versao\Logs\Newcon_Versao.log"
+$filePath = "C:\Newcon_Deploy\Logs\Newcon_Versao.log"
 
 # Define a palavra específica que você está procurando
 $palavraAlvo = "Trace"
@@ -41,6 +41,6 @@ if ($ultimaLinha -ne $null) {
     if ($fraseNaUltimaLinha -ne $null) {
         Write-Host $fraseNaUltimaLinha
     } else {
-        Write-Host "Processo finalizado sem sucesso."
+        Write-Host "Processo finalizado sem sucesso"
     }
 } 
