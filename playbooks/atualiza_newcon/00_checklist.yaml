@@ -2,14 +2,7 @@
   hosts: win
   gather_facts: false
   tasks:
-    ## Criar estrutura de diretorios
-    - name: Criar estrutura de diretorios
-      ansible.windows.win_file:
-        path: C:\Newcon_Deploy\
-        state: directory      
-    #  when: 0 > 1
-   
-    ## Download do pacote de versão
+     ## Download do pacote de versão
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
         url: https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000003.zip
