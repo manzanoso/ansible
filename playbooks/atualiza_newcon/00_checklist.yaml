@@ -4,11 +4,7 @@
     - /vars/variaveis.yaml  
   gather_facts: false
   tasks:
-    - name: Setar variaveis
-      set_fact: 
-        
-
-     ## Download do pacote de versão
+    ## Download do pacote de versão
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
         url: {{ url_ftp }}
