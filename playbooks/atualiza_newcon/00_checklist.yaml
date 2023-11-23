@@ -1,7 +1,7 @@
 - name: Windows Feature
   hosts: win
   vars_files:
-    - /vars/variaveis.yaml  
+    - vars/variaveis.yaml  
   gather_facts: false
   tasks:
     ## Download do pacote de versão
