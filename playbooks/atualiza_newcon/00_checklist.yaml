@@ -4,7 +4,7 @@
   tasks:
     - name: Exibe variavel importada
       debug:
-        msg: "Pega variavel de rodar tudo: {{ teste_var.stdout }}"  
+        msg: "Pega variavel de rodar tudo: {{ teste_var }}"  
 
 
      ## Download do pacote de versão
