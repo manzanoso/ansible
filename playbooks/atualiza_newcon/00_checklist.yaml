@@ -2,6 +2,11 @@
   hosts: win
   gather_facts: false
   tasks:
+    - name: Exibe variavel importada
+      debug:
+        msg: "Pega variavel de rodar tudo: {{ teste_var.stdout }}"  
+
+
      ## Download do pacote de versão
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
