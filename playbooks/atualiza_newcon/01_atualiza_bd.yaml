@@ -9,14 +9,14 @@
     ####################################################
     - name: Valida se tem Script de BD
       win_find:
-        paths: C:\Newcon_Deploy\Releases\
+        paths: '{{ dir_newcon_deploy }}\Releases'
         patterns: "*.ver"
       register: exists_script_db
 
     ## Se tiver script atualiza
     - name: Atualizar Script de BD
       win_shell: |
-        $resultado = c:\Newcon_Deploy\atualiza_script.ps1
+        $resultado = '{{ dir_newcon_deploy }}\atualiza_script.ps1'
       register: script_process    
       when: exists_script_db.matched > 0
 
