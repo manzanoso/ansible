@@ -1,4 +1,5 @@
-- hosts: web
+- name: Windows Feature
+  hosts: web
   vars_files:
     - vars/variaveis.yaml    
   gather_facts: false
