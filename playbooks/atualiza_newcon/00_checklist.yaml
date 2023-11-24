@@ -13,8 +13,8 @@
     ## Descompactar pacote
     - name: Descompactar pacote
       community.windows.win_unzip:
-        src: C:\Newcon_Deploy\Releases\SCRIPT_004_030_SEQ_000003.zip
-        dest: C:\Newcon_Deploy\Releases\
+        src: '{{ dir_newcon_deploy }}\SCRIPT_004_030_SEQ_000003.zip'
+        dest: '{{ dir_newcon_deploy }}'
         delete_archive: yes
 
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
