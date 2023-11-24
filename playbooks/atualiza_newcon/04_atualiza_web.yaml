@@ -33,7 +33,7 @@
     ## Faz o backup Intranet_Newcon.Web.Api (pacote atual)
     - name: Criar arquivo ZIP Intranet_Newcon.Web.Api
       community.windows.win_zip:
-        src: C:\Newcon_Web\Newcon.Web.Api\*
+        src: '{{ dir_newcon_web }}\Newcon.Web.Api\*'
         dest: '{{ dir_newcon_deploy }}\Backups\Intranet_Newcon.Web.Api_{{ data_hora_atual }}.zip'
       when: exists_newcon_web_api.matched > 0           
 
@@ -41,7 +41,7 @@
     #### ATENÇÃO!! Pre-req: ter instalado o 7zip no servidor de destino + o 7zip configurado no path
     - name: Descompactar pacote
       win_shell: |
-        7z x {{ dir_newcon_deploy }}\Releases\Web\Intranet_Newcon.Web.Api_004_030.zip -oC:\Newcon_Web\ -aoa '-xr!web.config' '-xr!appsettings.json' '-xr!nlog.json' '-xr!log.config'
+        7z x {{ dir_newcon_deploy }}\Releases\Web\Intranet_Newcon.Web.Api_004_030.zip -o {{ dir_newcon_web }}\ -aoa '-xr!web.config' '-xr!appsettings.json' '-xr!nlog.json' '-xr!log.config'
       when: exists_newcon_web_api.matched > 0
 
     ## Iniciar o application pool - Intranet_Newcon.Web.Api
