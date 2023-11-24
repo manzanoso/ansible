@@ -20,7 +20,7 @@
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
     - name: Verificar programas abertos
       win_shell: |
-        $programas = Get-ChildItem -Path "C:\Newcon_Deploy\Releases\Bin_Sch_Conins\*.exe" | Where-Object {! $_.PSIsContainer} | ForEach-Object { $_.Name -replace '\.\w+$' } | Where-Object { $_ -match '\S' }
+        $programas = Get-ChildItem -Path "{{ dir_newcon_deploy }}\Bin_Sch_Conins\*.exe" | Where-Object {! $_.PSIsContainer} | ForEach-Object { $_.Name -replace '\.\w+$' } | Where-Object { $_ -match '\S' }
         $programasAbertos = @()
         foreach ($programa in $programas) {
             $processo = Get-Process -Name $programa -ErrorAction SilentlyContinue
