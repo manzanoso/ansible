@@ -9,7 +9,7 @@
     ####################################################
     - name: Valida se tem Script de BD
       win_find:
-        paths: '{{ dir_newcon_deploy }}\Releases'
+        paths: '{{ dir_newcon_deploy }}\Releases\'
         patterns: "*.ver"
       register: exists_script_db
 
