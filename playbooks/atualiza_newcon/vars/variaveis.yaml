@@ -1,2 +1,4 @@
+# variaveis.yaml
+
 url_ftp: "https://www4.newconsoftware.com.br/teste/SCRIPT_004_030_SEQ_000003.zip"
-dir_newcon_deploy: "C:\Newcon_Deploy\Releases"
+dir_newcon_deploy: "C:\\Newcon_Deploy\\Releases"
