@@ -16,7 +16,7 @@
     ## Se tiver script atualiza
     - name: Atualizar Script de BD
       win_shell: |
-        $resultado = '{{ dir_newcon_deploy }}\atualiza_script.ps1'
+        $resultado = "{{ dir_newcon_deploy }}\atualiza_script.ps1"
       register: script_process    
       when: exists_script_db.matched > 0
 
