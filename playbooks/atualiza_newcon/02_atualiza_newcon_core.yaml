@@ -19,7 +19,7 @@
     ####################################################   
     - name: Valida se tem binarios do Newcon Core
       win_find:
-        paths: C:\Newcon_Deploy\Releases\Bin_Newcon_Core\
+        paths: '{{ dir_newcon_deploy }}\Releases\Bin_Newcon_Core\'
         patterns: "*.*"
       register: exists_bin_core
 
@@ -27,13 +27,13 @@
     - name: Criar arquivo ZIP Newcon Core
       community.windows.win_zip:
         src: C:\Newcon\Bin_Newcon_Core\*
-        dest: 'C:\Newcon_Deploy\Backups\newcon_core_{{ data_hora_atual }}.zip'
+        dest: '{{ dir_newcon_deploy }}\Backups\newcon_core_{{ data_hora_atual }}.zip'
       when: exists_bin_core.matched > 0   
  
     ## Atualiza o pacote do newcon core (pacote novo)
     - name: Copiar binarios para diretorio do Newcon Core
       ansible.windows.win_copy:
-        src: C:\Newcon_Deploy\Releases\Bin_Newcon_Core\
+        src: '{{ dir_newcon_deploy }}\Releases\Bin_Newcon_Core\'
         dest: C:\Newcon\Bin_Newcon_Core\
         remote_src: true            
       when: exists_bin_core.matched > 0   
