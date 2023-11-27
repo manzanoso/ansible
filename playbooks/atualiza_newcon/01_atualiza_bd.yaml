@@ -4,7 +4,10 @@
     - vars/variaveis.yaml   
   gather_facts: false
   tasks:
-    - include_vars: "00_checklist.yaml"  
+    - name: Include vars of stuff.yaml into the 'stuff' variable (2.2).
+      ansible.builtin.include_vars:
+        file: 00_checklist.yaml
+        name: stuff    
     
     ####################################################
     ## Valida se tem script de BD
