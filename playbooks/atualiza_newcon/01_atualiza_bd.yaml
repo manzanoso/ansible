@@ -2,9 +2,10 @@
   hosts: db
   vars_files:
     - vars/variaveis.yaml   
-  include_vars: "00_checklist.yaml"     
   gather_facts: false
   tasks:
+    - include_vars: "00_checklist.yaml"  
+    
     ####################################################
     ## Valida se tem script de BD
     ####################################################
