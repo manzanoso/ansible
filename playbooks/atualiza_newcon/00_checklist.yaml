@@ -18,9 +18,6 @@
       set_fact:
         nome_arquivo_sem_extensao: "{{ nome_arquivo.split('.zip')[0] }}"
 
-    - debug:
-        var: nome_arquivo_sem_extensao
-
     ## Descompactar pacote
     - name: Descompactar pacote
       community.windows.win_unzip:
