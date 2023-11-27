@@ -12,13 +12,17 @@
 
     - name: Extrair parte da URL após a última barra
       set_fact:
-        extracted_part: "{{ url_ftp | regex_replace('.*/', '') }}"
+        nome_arquivo: "{{ url_ftp | regex_replace('.*/', '') }}"
+
+    - name: Remover extensão do arquivo
+      set_fact:
+        nome_arquivo_sem_extensao: "{{ nome_arquivo.split('.')[0] }}"
 
     ## Descompactar pacote
     - name: Descompactar pacote
       community.windows.win_unzip:
-        src: '{{ dir_newcon_deploy }}\Releases\{{ extracted_part }}'
-        dest: '{{ dir_newcon_deploy }}\Releases\'
+        src: '{{ dir_newcon_deploy }}\Releases\{{ nome_arquivo }}'
+        dest: '{{ dir_newcon_deploy }}\Releases\{{ nome_arquivo_sem_extensao }}\'
         delete_archive: yes
 
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
