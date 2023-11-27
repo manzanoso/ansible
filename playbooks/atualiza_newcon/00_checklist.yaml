@@ -8,12 +8,16 @@
     - name: Download do pacote da versao
       ansible.windows.win_get_url:
         url: '{{ url_ftp }}'
-        dest: '{{ dir_newcon_deploy }}\Releases\SCRIPT_004_030_SEQ_000003.zip'
+        dest: '{{ dir_newcon_deploy }}\Releases\'
+
+    - name: Extrair parte da URL após a última barra
+      set_fact:
+        extracted_part: "{{ url_ftp | regex_replace('.*/', '') }}"
 
     ## Descompactar pacote
     - name: Descompactar pacote
       community.windows.win_unzip:
-        src: '{{ dir_newcon_deploy }}\Releases\SCRIPT_004_030_SEQ_000003.zip'
+        src: '{{ dir_newcon_deploy }}\Releases\{{ extracted_part }}'
         dest: '{{ dir_newcon_deploy }}\Releases\'
         delete_archive: yes
 
