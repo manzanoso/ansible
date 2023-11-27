@@ -16,7 +16,7 @@
 
     - name: Remover extensão do arquivo
       set_fact:
-        nome_arquivo_sem_extensao: "{{ nome_arquivo.split('.')[1] }}"
+        nome_arquivo_sem_extensao: "{{ nome_arquivo.split('.zip')[0] }}"
 
     - debug:
         var: nome_arquivo_sem_extensao
