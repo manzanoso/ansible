@@ -16,13 +16,13 @@
 
     - name: Remover extensão do arquivo
       set_fact:
-        nome_arquivo_sem_extensao: "{{ nome_arquivo.split('.zip')[0] }}"
+        dir_pacote: "{{ nome_arquivo.split('.zip')[0] }}"
 
     ## Descompactar pacote
     - name: Descompactar pacote
       community.windows.win_unzip:
         src: '{{ dir_newcon_deploy }}\Releases\{{ nome_arquivo }}'
-        dest: '{{ dir_newcon_deploy }}\Releases\{{ nome_arquivo_sem_extensao }}\'
+        dest: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\'
         delete_archive: yes
 
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote

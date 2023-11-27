@@ -13,12 +13,18 @@
         patterns: "*.ver"
       register: exists_script_db
 
+    - name: Criar link simbólico para o arquivo
+      file:
+        src: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\Script_BD\SCRIPT_004_030_SEQ_000003.VER'
+        dest: "{{ dir_newcon_deploy }}\Releases\SCRIPT_004_030_SEQ_000003.VER"
+        state: link      
+
     ## Se tiver script atualiza
     - name: Atualizar Script de BD
       win_shell: |
         $resultado = {{ dir_newcon_deploy }}\atualiza_script.ps1
       register: script_process    
-      when: exists_script_db.matched > 0
+      when: exists_script_db.matched > 10000
 
     ## Valida se o script foi processado com sucesso
     - name: Valida se o script de BD foi atualizado com sucesso
