@@ -23,7 +23,11 @@
       community.windows.win_unzip:
         src: '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}'
         dest: '{{ dir_newcon_deploy }}\Releases\'
-        delete_archive: no       
+        delete_archive: no      
+
+    ## Renomear o pacote zip
+    - name: Renomear arquivo no Windows
+      win_shell: ren '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}' '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}_aplicando'             
     
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
     - name: Verificar programas abertos
