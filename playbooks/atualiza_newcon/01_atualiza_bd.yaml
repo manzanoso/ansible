@@ -14,9 +14,9 @@
       register: exists_script_db
 
     ## Sai do fluxo se não existir o .ver
-    -name: Sai do fluxo
-     meta: end_play
-     when: exists_script_db.matched == 0
+    - name: Sai do fluxo
+      meta: end_play
+      when: exists_script_db.matched == 0
 
     ## Se tiver script atualiza
     - name: Atualizar Script de BD
