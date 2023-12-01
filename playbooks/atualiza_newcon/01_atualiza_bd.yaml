@@ -31,10 +31,7 @@
         msg: '{{ dir_newcon_deploy }}\Releases\SCRIPT_004_030_SEQ_000003.VER'
 
     - name: Criar link simbólico para o arquivo
-      file:
-        src: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\Script_BD\SCRIPT_004_030_SEQ_000003.VER'
-        dest: '{{ dir_newcon_deploy }}\Releases\SCRIPT_004_030_SEQ_000003.VER'
-        state: link      
+      win_shell: mklink /D '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\Script_BD\SCRIPT_004_030_SEQ_000003.VER' '{{ dir_newcon_deploy }}\Releases\SCRIPT_004_030_SEQ_000003.VER'
 
     ## Se tiver script atualiza
     - name: Atualizar Script de BD
