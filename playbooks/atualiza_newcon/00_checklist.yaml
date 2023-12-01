@@ -14,9 +14,9 @@
       set_fact:
         nome_arquivo: "{{ url_ftp | regex_replace('.*/', '') }}"
 
-    - name: Remover extensão do arquivo
-      set_fact:
-        dir_pacote: "{{ nome_arquivo.split('.zip')[0] }}"
+    ## Apagar o conteudo da pasta release
+    - name: Apagar o conteúdo da pasta release
+      win_shell: Remove-Item -Path '{{ dir_newcon_deploy }}\Releases\*' -Recurse -Force
 
     ## Descompactar pacote
     - name: Descompactar pacote
@@ -24,18 +24,7 @@
         src: '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}'
         dest: '{{ dir_newcon_deploy }}\Releases\'
         delete_archive: no       
-
-    ## Copiar o .ver para a raiz do Releases
-    - name: Encontrar arquivos a serem apagados
-      win_find:
-        paths: '{{ dir_newcon_deploy }}\Releases\'
-        patterns: "*"
-      register: arquivos_para_apagar
-
-    - name: Apagar os arquivos encontrados
-      win_shell: del "{{ item.path }}"
-      loop: "{{ arquivos_para_apagar.files }}"         
-
+    
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
     - name: Verificar programas abertos
       win_shell: |
