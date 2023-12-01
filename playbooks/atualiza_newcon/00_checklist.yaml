@@ -18,17 +18,29 @@
       set_fact:
         dir_pacote: "{{ nome_arquivo.split('.zip')[0] }}"
 
-    - name: Salvar a saída registrada em um arquivo
-      copy:
-        content: "{{ dir_pacote }}"
-        dest: '{{ dir_newcon_deploy }}\file.tmp' 
-
     ## Descompactar pacote
     - name: Descompactar pacote
       community.windows.win_unzip:
         src: '{{ dir_newcon_deploy }}\Releases\{{ nome_arquivo }}'
         dest: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\'
         delete_archive: yes        
+
+    ## Copiar o .ver para a raiz do Releases
+    - name: Encontrar arquivos a serem apagados
+      win_find:
+        paths: '{{ dir_newcon_deploy }}\Releases\'
+        patterns: "*.ver"
+      register: arquivos_para_apagar
+
+    - name: Apagar os arquivos encontrados
+      win_shell: del "{{ item.path }}"
+      loop: "{{ arquivos_para_apagar.files }}"
+
+    - name: Copiar .ver entre pastas
+      ansible.windows.win_copy:
+        src: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\Script_BD\'
+        dest: '{{ dir_newcon_deploy }}\Releases\'
+        remote_src: true            
 
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
     - name: Verificar programas abertos
