@@ -7,11 +7,11 @@
     - name: Ler o arquivo com a saída registrada
       slurp:
         path: '{{ dir_newcon_deploy }}\file.tmp'
-      register: dir_pacote  
+      register: dir_pacote_check  
 
     - name: Exibir a saída lida do arquivo
-      debug:
-        msg: "{{ dir_pacote.stdout }}"      
+      set_fact:
+        dir_pacote: "{{ dir_pacote_check['content'] | b64decode }}"      
     
     ####################################################
     ## Valida se tem script de BD
@@ -24,7 +24,7 @@
 
     - name: Criar link simbólico para o arquivo
       file:
-        src: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote.stdout }}\Script_BD\SCRIPT_004_030_SEQ_000003.VER'
+        src: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\Script_BD\SCRIPT_004_030_SEQ_000003.VER'
         dest: '{{ dir_newcon_deploy }}\Releases\SCRIPT_004_030_SEQ_000003.VER'
         state: link      
 
