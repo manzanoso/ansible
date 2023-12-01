@@ -22,6 +22,14 @@
         patterns: "*.ver"
       register: exists_script_db
 
+    - name: saida origem
+      debug:
+        msg: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\Script_BD\SCRIPT_004_030_SEQ_000003.VER'
+
+    - name: saida destino
+      debug:
+        msg: '{{ dir_newcon_deploy }}\Releases\SCRIPT_004_030_SEQ_000003.VER'
+
     - name: Criar link simbólico para o arquivo
       file:
         src: '{{ dir_newcon_deploy }}\Releases\{{ dir_pacote }}\Script_BD\SCRIPT_004_030_SEQ_000003.VER'
