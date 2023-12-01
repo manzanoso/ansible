@@ -18,7 +18,7 @@
       win_shell: |
         $resultado = {{ dir_newcon_deploy }}\atualiza_script.ps1
       register: script_process    
-      when: exists_script_db.matched > 10000
+      when: exists_script_db.matched > 0
 
     ## Valida se o script foi processado com sucesso
     - name: Valida se o script de BD foi atualizado com sucesso
