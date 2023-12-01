@@ -11,7 +11,7 @@
 
     - name: Exibir a saída lida do arquivo
       debug:
-        msg: "{{ dir_pacote['content'] | b64decode }}"      
+        msg: "{{ dir_pacote.stdout }}"      
     
     ####################################################
     ## Valida se tem script de BD
