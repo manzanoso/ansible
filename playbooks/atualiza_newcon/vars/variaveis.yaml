@@ -1,5 +1,5 @@
 # variaveis.yaml
 
-url_ftp: "https://www4.newconsoftware.com.br/teste/4.30.202307.3-TD.zip"
+url_ftp: "https://www4.newconsoftware.com.br/teste/4.30.202307.4-TD.zip"
 dir_newcon_deploy: "C:\\Newcon_Deploy"
 dir_newcon_web: "c:\\Newcon_Web"
