@@ -26,8 +26,14 @@
         delete_archive: no      
 
     ## Renomear o pacote zip
+    - name: Valida se o arquivo já existe
+      win_stat:
+        path: '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}.aplicando'
+      register: exists_arquivo
+
     - name: Renomear arquivo no Windows
       win_shell: ren '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}' '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}.aplicando'             
+      when: exists_arquivo.stdout false      
     
     ## Verifica programas abertos a partir do diretorio com os executaveis do pacote
     - name: Verificar programas abertos

@@ -28,5 +28,10 @@
     ## Valida se o script foi processado com sucesso
     - name: Valida se o script de BD foi atualizado com sucesso
       fail:
+      when: script_process.stdout != 'Processo finalizado com sucesso\n'
+
+    ## Renomear o pacote zip
+    - name: Renomear arquivo no Windows
+      win_shell: ren '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}' '{{ dir_newcon_deploy }}\Pacotes\{{ nome_arquivo }}.erro'                   
       when: script_process.stdout != 'Processo finalizado com sucesso\n'      
 
